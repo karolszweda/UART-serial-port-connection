@@ -72,7 +72,7 @@ void ConnWindow::on_pushButton_connect_clicked()
 void ConnWindow::on_pushButton_close_clicked()
 {
     if(this->device->isOpen()){
-        this->device->close();
+        this->device->close(); //hello
         this->addToLogs("Closed connection");
     } else {
         this->addToLogs("Port was not opened");
