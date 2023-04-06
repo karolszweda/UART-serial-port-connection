@@ -20,6 +20,8 @@ public:
 
 private slots:
     void on_pushButton_search_clicked();
+    void on_pushButton_connect_clicked();
+    void on_pushButton_close_clicked();
 
 private:
     Ui::ConnWindow *ui;
