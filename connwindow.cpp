@@ -1,7 +1,6 @@
 #include "connwindow.h"
 #include "ui_connwindow.h"
 
-
 #include <QSerialPortInfo>
 #include <QList>
 #include <QDateTime>
@@ -20,7 +19,6 @@ ConnWindow::~ConnWindow()
     //delete device; //I would have to use it if I didn't use "this"
 }
 
-
 void ConnWindow::on_pushButton_search_clicked()
 {
     this->addToLogs("Looking for devices...");
@@ -32,15 +30,7 @@ void ConnWindow::on_pushButton_search_clicked()
         this->addToLogs(devices.at(i).portName() + " " + devices.at(i).description());
         ui->comboBox_devices->addItem(devices.at(i).portName() + " " + devices.at(i).description());
     }
-
 }
-
-void ConnWindow::addToLogs(QString message)
-{
-    QString currentDateTime = QDateTime::currentDateTime().toString("yyyy.MM.dd hh:mm:ss");
-    ui->textLogs->append(currentDateTime + "\t" + message);
-}
-
 
 void ConnWindow::on_pushButton_connect_clicked()
 {
@@ -53,8 +43,6 @@ void ConnWindow::on_pushButton_connect_clicked()
     QStringList portList = comboBoxQString.split(" ");
     QString portName = portList.first();
     qDebug() << portName;
-//    this->device->setPortName(portName);
-//    this->device->setPortName("/dev/cu.usbmodem1401");
     this->device->setPortName("/dev/" + portName);
     if(!device->isOpen()){
         if(device->open(QSerialPort::ReadWrite)){ //opening a serial port with read and write communications || returns true if success
@@ -85,6 +73,9 @@ void ConnWindow::on_pushButton_close_clicked()
     }
 }
 
+//TO DO
+// - readAll() is better if we want to send it like protocol
+// Reading form a line is optimal for sending strings
 void ConnWindow::readFromPort(){
     while(this->device->canReadLine()){
         QString line = this->device->readLine();
@@ -95,22 +86,31 @@ void ConnWindow::readFromPort(){
         qDebug() << line.left(pos);
         this->addToLogs(line.left(pos));
     }
+}
 
+void ConnWindow::addToLogs(QString message)
+{
+    QString currentDateTime = QDateTime::currentDateTime().toString("yyyy.MM.dd hh:mm:ss");
+    ui->textLogs->append(currentDateTime + "\t" + message);
+}
+
+void ConnWindow::sendMessageToDevice(QString message){
+    if(this->device->isOpen() && this->device->isWritable()){
+        this->addToLogs("Sending message to device " + message);
+        this->device->write(message.toStdString().c_str()); //conversion QString to char array because of write()
+    } else {
+        this->addToLogs("Failed sending message " + message + " to device. Port is closed.");
+    }
+}
+
+void ConnWindow::on_pushButton_diode_on_clicked()
+{
+    this->sendMessageToDevice("1");
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+void ConnWindow::on_pushButton_diode_off_clicked()
+{
+    this->sendMessageToDevice("0");
+}
 

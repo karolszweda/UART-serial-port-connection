@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>581</width>
-    <height>671</height>
+    <height>638</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,67 +18,59 @@
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>0</y>
+      <y>10</y>
       <width>581</width>
-      <height>301</height>
+      <height>101</height>
      </rect>
     </property>
     <property name="title">
      <string>Connection</string>
     </property>
-    <widget class="QWidget" name="verticalLayoutWidget">
+    <widget class="QWidget" name="">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>60</y>
+       <width>579</width>
+       <height>32</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <item>
+       <widget class="QPushButton" name="pushButton_connect">
+        <property name="text">
+         <string>Connect</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_disconnect">
+        <property name="text">
+         <string>Disconnect</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QWidget" name="">
      <property name="geometry">
       <rect>
        <x>0</x>
        <y>20</y>
-       <width>581</width>
-       <height>141</height>
+       <width>579</width>
+       <height>38</height>
       </rect>
      </property>
-     <layout class="QVBoxLayout" name="verticalLayout">
+     <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout">
-        <item>
-         <widget class="QPushButton" name="pushButton_search">
-          <property name="text">
-           <string>Search</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QComboBox" name="comboBox_devices"/>
-        </item>
-       </layout>
+       <widget class="QPushButton" name="pushButton_search">
+        <property name="text">
+         <string>Search</string>
+        </property>
+       </widget>
       </item>
-     </layout>
-    </widget>
-    <widget class="QWidget" name="verticalLayoutWidget_2">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>160</y>
-       <width>581</width>
-       <height>141</height>
-      </rect>
-     </property>
-     <layout class="QVBoxLayout" name="verticalLayout_2">
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_2">
-        <item>
-         <widget class="QPushButton" name="pushButton_connect">
-          <property name="text">
-           <string>Connect</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="pushButton_disconnect">
-          <property name="text">
-           <string>Disconnect</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
+       <widget class="QComboBox" name="comboBox_devices"/>
       </item>
      </layout>
     </widget>
@@ -87,7 +79,7 @@
     <property name="geometry">
      <rect>
       <x>470</x>
-      <y>590</y>
+      <y>550</y>
       <width>100</width>
       <height>32</height>
      </rect>
@@ -100,9 +92,9 @@
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>300</y>
+      <y>110</y>
       <width>581</width>
-      <height>191</height>
+      <height>381</height>
      </rect>
     </property>
     <property name="title">
@@ -114,8 +106,21 @@
        <x>10</x>
        <y>30</y>
        <width>561</width>
-       <height>151</height>
+       <height>301</height>
       </rect>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_clear">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>340</y>
+       <width>561</width>
+       <height>32</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Clear</string>
      </property>
     </widget>
    </widget>
@@ -125,7 +130,7 @@
       <x>0</x>
       <y>490</y>
       <width>581</width>
-      <height>101</height>
+      <height>61</height>
      </rect>
     </property>
     <property name="title">
@@ -137,7 +142,7 @@
        <x>0</x>
        <y>20</y>
        <width>581</width>
-       <height>80</height>
+       <height>41</height>
       </rect>
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout_3">
@@ -181,11 +186,27 @@
    <hints>
     <hint type="sourcelabel">
      <x>489</x>
-     <y>350</y>
+     <y>614</y>
     </hint>
     <hint type="destinationlabel">
      <x>291</x>
      <y>346</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_clear</sender>
+   <signal>clicked()</signal>
+   <receiver>textLogs</receiver>
+   <slot>clear()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>322</x>
+     <y>498</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>350</x>
+     <y>401</y>
     </hint>
    </hints>
   </connection>

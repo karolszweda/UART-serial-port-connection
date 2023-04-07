@@ -24,9 +24,14 @@ private slots:
     void on_pushButton_close_clicked();
     void readFromPort();
 
+    void on_pushButton_diode_on_clicked();
+
+    void on_pushButton_diode_off_clicked();
+
 private:
     Ui::ConnWindow *ui;
     QSerialPort *device; // object's pointer
     void addToLogs(QString message);
+    void sendMessageToDevice(QString message);
 };
 #endif // CONNWINDOW_H
