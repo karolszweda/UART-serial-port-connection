@@ -3,5 +3,5 @@ Desktop application transmitting data from Arduino UNO using serial port connect
 ![arduino](t725.png)
 
 ## GUI
-Basic functionalities
+Basic functionalities with turning on/off the build in LED
 ![app](app.png)
