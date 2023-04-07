@@ -49,9 +49,13 @@ void ConnWindow::on_pushButton_connect_clicked()
         return;
     }
 
-    QString portName = ui->comboBox_devices->currentText().split("\t").first();
-    this->device->setPortName(portName);
-
+    QString comboBoxQString = ui->comboBox_devices->currentText();
+    QStringList portList = comboBoxQString.split(" ");
+    QString portName = portList.first();
+    qDebug() << portName;
+//    this->device->setPortName(portName);
+//    this->device->setPortName("/dev/cu.usbmodem1401");
+    this->device->setPortName("/dev/" + portName);
     if(!device->isOpen()){
         if(device->open(QSerialPort::ReadWrite)){ //opening a serial port with read and write communications || returns true if success
             this->device->setBaudRate(QSerialPort::Baud9600);
@@ -59,10 +63,11 @@ void ConnWindow::on_pushButton_connect_clicked()
             this->device->setParity(QSerialPort::NoParity);
             this->device->setStopBits(QSerialPort::OneStop);
             this->device->setFlowControl(QSerialPort::NoFlowControl);
-
             this->addToLogs("Opened serial port");
+            //Connect
+            connect(this->device, SIGNAL(readyRead()), this, SLOT(readFromPort()));
         } else {
-            this->addToLogs("Error opening serial port");
+            this->addToLogs("Failed to open serial port: " + device->errorString());
         }
     } else {
         this->addToLogs("Port is already open");
@@ -79,4 +84,33 @@ void ConnWindow::on_pushButton_close_clicked()
         return;
     }
 }
+
+void ConnWindow::readFromPort(){
+    while(this->device->canReadLine()){
+        QString line = this->device->readLine();
+
+        qDebug() << line;
+        QString terminator = "\r";
+        int pos = line.lastIndexOf(terminator);
+        qDebug() << line.left(pos);
+        this->addToLogs(line.left(pos));
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
